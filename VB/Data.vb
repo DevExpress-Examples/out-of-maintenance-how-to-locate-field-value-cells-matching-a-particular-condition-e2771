@@ -1,9 +1,8 @@
-﻿Imports Microsoft.VisualBasic
-Imports System.Data
+﻿Imports System.Data
 Imports DevExpress.Xpf.PivotGrid
 
 Namespace DXPivotGrid_FindCells
-	Public NotInheritable Class PivotHelper
+	Public Module PivotHelper
 		Public Const Employee As String = "Employee"
 		Public Const Widget As String = "Widget"
 		Public Const Month As String = "Month"
@@ -18,9 +17,7 @@ Namespace DXPivotGrid_FindCells
 		Public Const WidgetB As String = "Widget B"
 		Public Const WidgetC As String = "Widget C"
 
-		Private Sub New()
-		End Sub
-		Public Shared Sub FillPivot(ByVal pivot As PivotGridControl)
+		Public Sub FillPivot(ByVal pivot As PivotGridControl)
 			pivot.Fields.Add(Employee, FieldArea.RowArea)
 			pivot.Fields.Add(Widget, FieldArea.RowArea)
 			pivot.Fields.Add(Month, FieldArea.ColumnArea).AreaIndex = 0
@@ -36,7 +33,7 @@ Namespace DXPivotGrid_FindCells
 			pivot.DataFieldArea = DataFieldArea.ColumnArea
 			pivot.DataFieldAreaIndex = 1
 		End Sub
-		Private Shared Function GetAllowedArea(ByVal area As FieldArea) As FieldAllowedAreas
+		Private Function GetAllowedArea(ByVal area As FieldArea) As FieldAllowedAreas
 			Select Case area
 				Case FieldArea.ColumnArea
 					Return FieldAllowedAreas.ColumnArea
@@ -50,7 +47,7 @@ Namespace DXPivotGrid_FindCells
 					Return FieldAllowedAreas.All
 			End Select
 		End Function
-		Public Shared Function GetDataTable() As DataTable
+		Public Function GetDataTable() As DataTable
 			Dim table As New DataTable()
 			table.Columns.Add(Employee, GetType(String))
 			table.Columns.Add(Widget, GetType(String))
@@ -73,5 +70,5 @@ Namespace DXPivotGrid_FindCells
 			table.Rows.Add(EmployeeB, WidgetC, 7, 40.0, 38.3, 7, 1)
 			Return table
 		End Function
-	End Class
+	End Module
 End Namespace
